@@ -369,3 +369,4 @@ export const SongDetail = () => {
     </div>
   );
 };
+
