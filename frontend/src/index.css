@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 2%;
+    --foreground: 0 0% 93%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 93%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 93%;
+    --primary: 43 56% 52%;
+    --primary-foreground: 0 0% 2%;
+    --secondary: 280 95% 10%;
+    --secondary-foreground: 0 0% 93%;
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 43 100% 49%;
+    --accent-foreground: 0 0% 2%;
+    --destructive: 0 72% 35%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 43 56% 52%;
+    --radius: 0.5rem;
+    --chart-1: 43 56% 52%;
+    --chart-2: 280 65% 40%;
+    --chart-3: 142 50% 35%;
+    --chart-4: 200 60% 50%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-[#050505] text-[#EDEDED] antialiased;
+    font-family: 'Manrope', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  .font-serif {
+    font-family: 'Libre Baskerville', serif;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-xl bg-black/40 border border-white/10;
+  }
+  
+  .gold-glow {
+    box-shadow: 0 0 40px -10px rgba(212, 175, 55, 0.3);
+  }
+  
+  .surface-card {
+    @apply bg-[#0F0F10] border border-white/5;
+  }
+  
+  .btn-primary {
+    @apply bg-[#D4AF37] text-black hover:bg-[#E5C558] font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-white/5 border border-white/10 text-white hover:bg-white/10 px-6 py-3 rounded-full backdrop-blur-md transition-all duration-300;
+  }
+  
+  .input-dark {
+    @apply bg-black/20 border-white/10 focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] text-white placeholder:text-white/30;
+  }
+  
+  .text-gold {
+    @apply text-[#D4AF37];
+  }
+  
+  .bg-surface {
+    @apply bg-[#0F0F10];
+  }
+  
+  .bg-surface-highlight {
+    @apply bg-[#18181B];
+  }
+  
+  .hero-gradient {
+    background: radial-gradient(circle at 50% 0%, rgba(46, 2, 73, 0.4) 0%, rgba(5, 5, 5, 0) 70%);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F0F10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3F3F46;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #EDEDED;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 2px;
+}
+
+[data-debug-wrapper="true"] {
+  display: contents !important;
+}

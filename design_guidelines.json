@@ -1,0 +1,140 @@
+{
+  "design_system": {
+    "identity": {
+      "name": "Kantik Tracks Studio",
+      "tone": "Cinematic, Spiritual, Professional, Deep",
+      "visual_metaphor": "The Studio Sanctuary - where technical precision meets spiritual depth",
+      "persona": "E1 - The Anti-AI Designer"
+    },
+    "typography": {
+      "font_family": {
+        "headings": "Clash Display, 'Outfit', sans-serif",
+        "body": "Geist, 'Manrope', sans-serif",
+        "mono": "'JetBrains Mono', monospace",
+        "accent": "'Libre Baskerville', serif"
+      },
+      "scale": {
+        "h1": "text-5xl md:text-7xl font-semibold tracking-tight",
+        "h2": "text-3xl md:text-5xl font-medium tracking-tight",
+        "h3": "text-2xl md:text-3xl font-medium",
+        "body_lg": "text-lg leading-relaxed",
+        "body_base": "text-base leading-relaxed text-muted-foreground",
+        "caption": "text-xs uppercase tracking-widest text-muted-foreground/60"
+      },
+      "rules": "Never use Inter for headings. Use Serif accents for spiritual quotes or song lyrics."
+    },
+    "colors": {
+      "theme": "dark",
+      "palette": {
+        "background": "#050505",
+        "surface": "#0F0F10",
+        "surface_highlight": "#18181B",
+        "primary": "#D4AF37",
+        "primary_hover": "#E5C558",
+        "secondary": "#2E0249",
+        "accent": "#FFB700",
+        "text_main": "#EDEDED",
+        "text_muted": "#A1A1AA",
+        "border": "#27272A",
+        "error": "#991B1B",
+        "success": "#15803D"
+      },
+      "gradients": {
+        "hero": "radial-gradient(circle at 50% 0%, rgba(46, 2, 73, 0.4) 0%, rgba(5, 5, 5, 0) 70%)",
+        "gold_glow": "linear-gradient(135deg, #D4AF37 0%, #B49020 100%)",
+        "surface_shine": "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%)"
+      }
+    },
+    "layout": {
+      "spacing": {
+        "container_padding": "p-6 md:p-12 lg:p-16",
+        "section_gap": "gap-12 md:gap-24"
+      },
+      "grid_systems": {
+        "catalog": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
+        "dashboard": "grid grid-cols-1 md:grid-cols-12 gap-6",
+        "bento": "grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]"
+      },
+      "border_radius": {
+        "default": "rounded-none",
+        "card": "rounded-lg",
+        "button": "rounded-full"
+      }
+    },
+    "visual_enhancers": {
+      "glassmorphism": "backdrop-blur-xl bg-black/40 border border-white/10",
+      "noise": "url('/noise.png') opacity-5",
+      "shadows": {
+        "glow": "0 0 40px -10px rgba(212, 175, 55, 0.3)",
+        "deep": "0 24px 48px -12px rgba(0, 0, 0, 0.8)"
+      },
+      "borders": "1px solid rgba(255,255,255,0.08)"
+    },
+    "components": {
+      "buttons": {
+        "primary": "bg-[#D4AF37] text-black hover:bg-[#E5C558] font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:scale-105",
+        "secondary": "bg-white/5 border border-white/10 text-white hover:bg-white/10 px-6 py-3 rounded-full backdrop-blur-md",
+        "ghost": "text-white/60 hover:text-white hover:bg-white/5"
+      },
+      "cards": {
+        "song_card": "group relative bg-surface border border-white/5 hover:border-[#D4AF37]/50 transition-all duration-300 overflow-hidden",
+        "feature_card": "bg-gradient-to-b from-white/5 to-transparent border border-white/5 p-8"
+      },
+      "inputs": {
+        "default": "bg-black/20 border-white/10 focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] text-white placeholder:text-white/20"
+      }
+    },
+    "motion": {
+      "transition_default": "transition-all duration-300 ease-out",
+      "hover_lift": "hover:-translate-y-1 hover:shadow-lg",
+      "stagger_delay": 0.1
+    },
+    "accessibility": {
+      "contrast_check": "Ensure gold text is only used on very dark backgrounds. Use white for body text.",
+      "interactive_focus": "focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_bg": {
+        "url": "https://images.unsplash.com/photo-1484584343816-b22e89904ab2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzV8MHwxfHNlYXJjaHwzfHx3b3JzaGlwJTIwbGVhZGVyJTIwc3RhZ2UlMjBzaWxob3VldHRlJTIwZGFyayUyMG1vb2R5fGVufDB8fHx8MTc3MTI5MzQ2NHww&ixlib=rb-4.1.0&q=85",
+        "alt": "Silhouette of worship leader raising hands in dark moody lighting",
+        "category": "hero"
+      },
+      "studio_texture": {
+        "url": "https://images.unsplash.com/photo-1550524756-d07d631274cc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwyfHxtdXNpYyUyMHN0dWRpbyUyMG1peGluZyUyMGNvbnNvbGUlMjBjbG9zZSUyMHVwJTIwZGFya3xlbnwwfHx8fDE3NzEyOTM0NjV8MA&ixlib=rb-4.1.0&q=85",
+        "alt": "Close up of audio mixing console in dark studio",
+        "category": "texture"
+      },
+      "musicians": {
+        "url": "https://images.unsplash.com/photo-1576495348486-f033d68e99b8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwxfHxncm91cCUyMG9mJTIwbXVzaWNpYW5zJTIwbG9va2luZyUyMGF0JTIwdGFibGV0JTIwc2hlZXQlMjBtdXNpY3xlbnwwfHx8fDE3NzEyOTM0NjZ8MA&ixlib=rb-4.1.0&q=85",
+        "alt": "Musicians playing violin in grayscale",
+        "category": "team"
+      }
+    },
+    "icons": {
+      "library": "lucide-react",
+      "preferred_set": ["Music2", "Mic2", "ListMusic", "Users", "CreditCard", "Download", "Play", "Pause", "SkipForward", "Volume2"]
+    }
+  },
+  "instructions_to_main_agent": {
+    "general": "You are building a premium, dark-mode worship resource platform. Avoid generic SaaS looks. Think 'Spotify meets High-End Architectural Studio'.",
+    "theme_setup": "Force dark mode by default in Tailwind config. Set background to #050505.",
+    "layout_rules": [
+      "Use 'container mx-auto' but with 'max-w-7xl' for wider screens.",
+      "In the catalog, use a masonry or tight grid layout for song cards.",
+      "The Song Detail page should look like a digital liner note booklet - elegant, spacious, text-focused."
+    ],
+    "components": [
+      "Customize Shadcn components to remove the default 'slate' look. Use the #121212 surface color.",
+      "Buttons should be pill-shaped (rounded-full) for a modern app feel.",
+      "Inputs should be flat with bottom borders or very subtle full borders."
+    ],
+    "universal_guidelines": [
+      "Do NOT use gradients on text unless it's a very large h1.",
+      "Do NOT center everything. Use asymmetry for interest.",
+      "Use 2x padding inside cards.",
+      "All interactive elements must have data-testid."
+    ]
+  }
+}

@@ -1,0 +1,109 @@
+/* App-specific styles */
+
+.song-card {
+  @apply relative bg-[#0F0F10] border border-white/5 hover:border-[#D4AF37]/50 transition-all duration-300 overflow-hidden rounded-lg;
+}
+
+.song-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5);
+}
+
+.feature-card {
+  @apply bg-gradient-to-b from-white/5 to-transparent border border-white/5 p-8 rounded-lg;
+}
+
+.nav-link {
+  @apply text-white/60 hover:text-white transition-colors duration-200;
+}
+
+.nav-link.active {
+  @apply text-[#D4AF37];
+}
+
+.badge-standard {
+  @apply bg-emerald-500/20 text-emerald-400 border border-emerald-500/30;
+}
+
+.badge-premium {
+  @apply bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/30;
+}
+
+.badge-team {
+  @apply bg-purple-500/20 text-purple-400 border border-purple-500/30;
+}
+
+.plan-card {
+  @apply relative bg-[#0F0F10] border border-white/10 rounded-2xl p-8 transition-all duration-300;
+}
+
+.plan-card.featured {
+  @apply border-[#D4AF37]/50 scale-105;
+  box-shadow: 0 0 60px -20px rgba(212, 175, 55, 0.3);
+}
+
+.plan-card:hover {
+  @apply border-white/20;
+}
+
+.plan-card.featured:hover {
+  @apply border-[#D4AF37]/70;
+}
+
+/* Drag and drop styles */
+.sortable-item {
+  @apply transition-transform duration-200;
+}
+
+.sortable-item.dragging {
+  @apply opacity-50 scale-105;
+}
+
+/* Table styles */
+.data-table {
+  @apply w-full;
+}
+
+.data-table th {
+  @apply text-left text-xs uppercase tracking-wider text-white/50 font-medium py-3 px-4 border-b border-white/10;
+}
+
+.data-table td {
+  @apply py-4 px-4 border-b border-white/5;
+}
+
+.data-table tr:hover td {
+  @apply bg-white/5;
+}
+
+/* Toast overrides */
+[data-sonner-toaster] {
+  --normal-bg: #0F0F10;
+  --normal-border: rgba(255, 255, 255, 0.1);
+  --normal-text: #EDEDED;
+  --success-bg: #15803D;
+  --error-bg: #991B1B;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  @apply fixed inset-0 bg-black/80 backdrop-blur-sm z-50;
+}
+
+/* Skeleton loading */
+.skeleton {
+  @apply bg-white/10 animate-pulse rounded;
+}
+
+/* Status badges */
+.status-pending {
+  @apply bg-yellow-500/20 text-yellow-400;
+}
+
+.status-approved {
+  @apply bg-green-500/20 text-green-400;
+}
+
+.status-rejected {
+  @apply bg-red-500/20 text-red-400;
+}

@@ -1,0 +1,179 @@
+<analysis>**original_problem_statement:**
+The user wants to build a complete MVP web app called “Kantik Tracks Studio”. It's a worship resources platform inspired by PraiseCharts, but for Haitian “Chants d’Espérance”, focusing on PDF chord charts.
+
+**PRODUCT REQUIREMENTS:**
+- **Users & Plans:**
+    - **FREE:** Browse catalog, preview watermarked images.
+    - **STANDARD (monthly):** 1 user, download STANDARD songs, personal library, personal playlists.
+    - **TEAM (monthly):** Up to 7 users, download STANDARD + PREMIUM songs, shared library, shared playlists, team management.
+- **Billing (MVP):** Manual monthly renewals. Users upload payment proof (MonCash or Bank Transfer), and an admin approves it to extend the subscription.
+- **Core Features:**
+    - **Catalog:** Search and filter songs by tier, language, etc.
+    - **Song Detail Page:** Metadata, watermarked preview, download button (gated), add to playlist button.
+    - **Library:** A page for users to see their downloaded songs.
+    - **Playlists/Setlists:** Create, manage, and reorder songs in playlists. Team playlists are shared.
+    - **Team Management:** Invite/remove members (up to 7), manage roles.
+- **Admin Console:**
+    - Full CRUD for songs, including uploading PDF resources (, ).
+    - Set song access tier (STANDARD/PREMIUM).
+    - Review and approve/reject pending manual payments.
+    - Manage users (e.g., promote to ADMIN).
+- **Automatic Preview Generation:** When an admin uploads a , the system must automatically generate a preview image from the first page and save it. The manual preview upload option should be removed.
+- **Tech Stack:** The user preferred Next.js/Firebase, but the agent has adapted to the provided environment of **React (Frontend) + FastAPI (Backend) + MongoDB (Database)**.
+- **Security:** PDF downloads must be protected (e.g., via signed URLs) and accessible only to users with an active, entitled plan.
+
+**User's preferred language**: English
+
+**what currently exists?**
+A full-stack application with a React frontend and FastAPI backend. The application features user authentication (registration and login), a public-facing song catalog, a song detail page, and a pricing page. A comprehensive admin dashboard has been built with functionality to manage users and songs. The latest feature implemented is the automatic generation of a watermarked preview image whenever a  is uploaded for a song.
+
+**Last working item**:
+- Last item agent was working: Implementing automatic preview image generation from uploaded PDFs. The agent installed , updated the backend file upload endpoint to generate and save a preview image, and modified the frontend , , and  pages to display the preview and remove the manual upload UI.
+- Status: USER VERIFICATION PENDING
+- Agent Testing Done: Y (Tested via  for the backend and  tool for the frontend).
+- Which testing method agent to use? both
+- User Testing Done: N
+
+**All Pending/In progress Issue list**:
+- **Issue 1 (P0): Automated tests are failing on the frontend.**
+  - **Description:** In a previous step (Message 109), the  reported frontend rendering issues after the admin dashboard was created. The agent manually verified with screenshots and concluded it was a session/timing issue with the test runner, but the root cause of the test failure was not investigated or fixed.
+  - **Status:** NOT STARTED
+  - **Next debug checklist:**
+    - Re-run the  with a focus on the frontend tests.
+    - Examine the test report at  for specific errors.
+    - Check for race conditions in the test scripts related to authentication and data loading.
+    - Verify that  attributes are correctly placed and unique on all interactive elements in the admin section.
+  - **Why fix this issue and what will be achieved with the fix?** To ensure the application is robust and that future changes do not introduce regressions. A stable test suite is critical for reliable development.
+  - **Is recurring issue?** Y
+  - **Should Test frontend/backend/both after fix?** frontend
+
+**In progress Task List**:
+None.
+
+**Upcoming and Future Tasks**
+**Upcoming Tasks (P0 - Core User MVP Features):**
+- **Task 1 (P0): Implement Playlists/Setlists.**
+  - Create backend endpoints for creating/renaming/deleting playlists, adding/removing/reordering songs.
+  - Build the  page on the frontend for users to manage their playlists.
+  - Implement drag-and-drop reordering for songs within a playlist.
+- **Task 2 (P0): Implement Team Functionality.**
+  - Create backend endpoints for creating teams, inviting members by email (max 7), and managing roles.
+  - Build the  page for team owners to manage their team.
+  - Implement logic for shared playlists and a shared library for team members.
+- **Task 3 (P0): Implement Manual Payment Submission.**
+  - Create a backend endpoint for users to submit payment proof ().
+  - Build the frontend flow under the  page for users to upload receipts and payment details.
+- **Task 4 (P0): Implement Admin Payment Review.**
+  - Build the  page to list pending payments.
+  - Implement the UI for admins to view payment details/receipts and approve/reject them.
+  - Ensure the backend  logic correctly extends user subscriptions upon approval.
+
+**Future Tasks (P1/P2):**
+- **Task 5 (P1): Implement User Library.**
+  - Build the  page where users can see a list of songs they are entitled to download.
+- **Task 6 (P2): Implement Google OAuth.**
+  - Add Google Social Login as an alternative to email/password (deferred from the initial setup).
+- **Task 7 (P2): Prepare for Automatic Stripe Renewals.**
+  - Add placeholders in the code for future integration with Stripe for automatic subscriptions.
+- **Task 8 (P2): Make the app a PWA.**
+  - Add a web app manifest and a basic service worker for caching.
+- **Task 9 (P2): Related Songs feature.**
+  - Add a section on the song detail page to show related songs based on tags or other metadata.
+
+**Completed work in this session**
+- **Initial MVP Scaffolding:** User authentication, song catalog, song detail page, pricing page, and basic admin dashboard structure. (DONE)
+- **Full Admin Dashboard:** Implemented pages for managing users, and songs, including viewing stats and roles. (DONE)
+- **Automatic PDF Preview Generation:** When an admin uploads a , a preview image is automatically generated and displayed. The manual preview upload has been removed. (DONE)
+
+**Earlier issues found/mentioned but not fixed**
+- **Issue 1: Unresolved Frontend Test Failures**
+   - **Debug checklist:** Rerun  and analyze the test report for authentication or rendering timing issues in the test scripts.
+   - **Why to solve this issue and what will be achieved with this?** A reliable testing suite is essential for preventing regressions. Fixing this ensures the stability of the admin-facing features.
+   - **Should Test frontend/backend/both after fix:** frontend
+   - **Is recurring issue?** Y
+
+**Known issue recurrence from previous fork**
+None.
+
+**Code Architecture**
+
+
+**Key Technical Concepts**
+- **Backend:** FastAPI, MongoDB (using ), JWT for authentication,  for PDF processing.
+- **Frontend:** React, React Router, Tailwind CSS, Shadcn UI components.
+- **Architecture:** Single-file monolith for the backend (), component-based architecture for the frontend.
+
+**key DB schema**
+- **songs:** , , , , ,  (array of objects like ).
+- **users:** , , , ,  ( or ).
+- **payments:** (Defined in PRD, but not yet implemented)
+- **teams:** (Defined in PRD, but not yet implemented)
+- **playlists:** (Defined in PRD, but not yet implemented)
+
+**changes in tech stack**
+- The project was adapted from the user's preferred **Next.js/Firebase** stack to the environment's existing **React/FastAPI/MongoDB** stack. All Firebase-specific features (Auth, Storage, Functions) have been implemented using equivalent technologies in the current stack.
+
+**All files of reference**
+- : The core backend file containing all API endpoints, database logic, and the new PDF preview generation logic.
+- : Contains the main application routing, including the new protected admin routes.
+- : Updated to remove manual preview upload and show preview status.
+- : Updated to display the auto-generated preview image.
+- : Updated to display the preview image on the catalog page.
+- : Updated to include user  for frontend access control.
+- : Contains the product requirements document.
+- : Contains setup and admin instructions.
+
+**Areas that need refactoring**:
+- The  file is becoming a monolith containing all backend logic (auth, songs, admin, file uploads). It should be refactored into smaller, more manageable modules using FastAPI's  for better organization.
+
+**key api endpoints**
+- 
+- 
+- 
+- 
+- : Handles file uploads and triggers preview generation.
+- 
+- 
+- 
+
+**Critical Info for New Agent**
+- The tech stack is React/FastAPI/MongoDB, not Next.js/Firebase. You must continue building within this stack.
+- An automated test run failed previously, pointing to potential frontend instability. While manually verified, this issue should be properly investigated before proceeding with new features.
+- The next set of tasks involves building the core user-facing features: Playlists, Team Management, and the Payment Submission flow.
+
+**documents and test reports created in this job**
+- 
+- 
+
+**Last 10 User Messages and any pending HUMAN messages**
+- **User (Msg 115):** Requested automatic PDF-to-image preview generation when an admin uploads a , and removal of the manual preview upload UI. **Status: Completed.**
+- **User (Msg 48):** Requested a full Admin Dashboard with management pages for songs, payments, and users, along with role-based access control. **Status: Completed.**
+- **User (Msg 5):** Provided initial choices: email/password auth, dark theme, FR/EN bilingual support, and use of Firebase Storage (which was adapted). **Status: Completed.**
+
+**Project Health Check:**
+- **Working:** Core app browsing, user auth, and admin dashboard are functional.
+- **Broken:** The automated frontend test suite is unreliable and needs investigation.
+
+**3rd Party Integrations**
+- : Used on the backend for JWT token verification.
+- : Used for creating JWT tokens.
+- : Used for hashing passwords.
+- : The driver for connecting to the MongoDB database.
+- : Used for rendering PDF pages into images for previews.
+
+**Testing status**
+- Testing agent used after significant changes: YES
+- Troubleshoot agent used after agent stuck in loop: NO
+- Test files created: None.
+- Known regressions: The frontend test suite is failing, but the cause is unconfirmed.
+
+**Credentials to test flow:**
+- **Admin:**  / 
+- **User:**  / 
+
+**What agent forgot to execute**
+The agent has successfully implemented the admin-facing features and the public catalog. However, the core features that provide value to subscribed users are still pending from the original problem statement:
+- **Playlists/Setlists:** Not started.
+- **Team Management:** Not started.
+- **Manual Payment Submission Flow:** Not started.
+- **User Library Page:** Not started.</analysis>
