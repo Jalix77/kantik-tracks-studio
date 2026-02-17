@@ -63,7 +63,7 @@ export const AdminPayments = () => {
     fetchPayments();
   }, [fetchPayments]);
 
-  const viewPaymentDetails
+  const viewPaymentDetails = async (payment) => {
     setSelectedPayment(payment);
     setDetailDialogOpen(true);
     setReceiptData(null);

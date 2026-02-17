@@ -46,7 +46,7 @@ export const Catalog = () => {
     fetchSongs();
   }, [fetchSongs]);
 
-  const handleSearch
+  const handleSearch = (e) => {
     e.preventDefault();
     fetchSongs();
   };

@@ -89,7 +89,7 @@ export const AdminUsers = () => {
     filterUsers();
   }, [filterUsers]);
 
-  const viewUserDetails
+  const viewUserDetails = async (user) => {
     try {
       const response = await axios.get(`${API}/admin/users/${user.id}`);
       setSelectedUser(response.data);
