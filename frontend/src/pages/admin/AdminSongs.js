@@ -496,3 +496,5 @@ export const AdminSongs = () => {
     </div>
   );
 };
+
+export default AdminSongs;

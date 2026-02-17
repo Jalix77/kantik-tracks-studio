@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -31,18 +31,7 @@ export const SongDetail = () => {
   const [previewLoading, setPreviewLoading] = useState(true);
   const [previewError, setPreviewError] = useState(false);
 
-  useEffect(() => {
-    fetchSong();
-  }, [id]);
-
-  useEffect(() => {
-    if (song) {
-      // Check if preview exists
-      checkPreview();
-    }
-  }, [song]);
-
-  const fetchSong = async () => {
+  const fetchSong = useCallback(async () => {
     setLoading(true);
     try {
       const response = await axios.get(`${API}/songs/${id}`);
@@ -59,9 +48,9 @@ export const SongDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
-  const checkPreview = async () => {
+  const checkPreview = useCallback(async () => {
     setPreviewLoading(true);
     setPreviewError(false);
     try {
@@ -78,9 +67,19 @@ export const SongDetail = () => {
     } finally {
       setPreviewLoading(false);
     }
-  };
+  }, [id]);
 
-  const fetchPlaylists = async () => {
+  useEffect(() => {
+    fetchSong();
+  }, [fetchSong]);
+
+  useEffect(() => {
+    if (song) {
+      checkPreview();
+    }
+  }, [song, checkPreview]);
+
+  const fetchPlaylists
     if (!isAuthenticated) return;
     try {
       const response = await axios.get(`${API}/playlists`);

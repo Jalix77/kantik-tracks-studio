@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
@@ -55,10 +55,6 @@ export const AdminUsers = () => {
     fetchUsers();
   }, []);
 
-  useEffect(() => {
-    filterUsers();
-  }, [users, searchQuery, planFilter]);
-
   const fetchUsers = async () => {
     try {
       const response = await axios.get(`${API}/admin/users`);
@@ -71,7 +67,7 @@ export const AdminUsers = () => {
     }
   };
 
-  const filterUsers = () => {
+  const filterUsers = useCallback(() => {
     let filtered = [...users];
     
     if (searchQuery) {
@@ -86,10 +82,14 @@ export const AdminUsers = () => {
       filtered = filtered.filter(u => u.plan === planFilter);
     }
     
-    setFilteredUsers(filtered);
-  };
+   setFilteredUsers(filtered);
+  }, [users, searchQuery, planFilter]);
 
-  const viewUserDetails = async (user) => {
+  useEffect(() => {
+    filterUsers();
+  }, [filterUsers]);
+
+  const viewUserDetails
     try {
       const response = await axios.get(`${API}/admin/users/${user.id}`);
       setSelectedUser(response.data);
@@ -508,3 +508,5 @@ export const AdminUsers = () => {
     </div>
   );
 };
+
+export default AdminUsers;

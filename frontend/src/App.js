@@ -13,7 +13,7 @@ import { Pricing } from "./pages/Pricing";
 import { Account } from "./pages/Account";
 import { Team } from "./pages/Team";
 import { Auth } from "./pages/Auth";
-import { AdminDashboard, AdminSongs, AdminPayments, AdminUsers } from "./pages/admin";
+import { AdminDashboard, AdminSongs, AdminPayments, AdminUsers } from "./pages/admin/index";
 
 // Protected route component
 const ProtectedRoute = ({ children, adminOnly = false }) => {

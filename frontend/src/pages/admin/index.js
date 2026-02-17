@@ -1,4 +1,4 @@
-export { AdminDashboard } from './AdminDashboard';
-export { AdminSongs } from './AdminSongs';
-export { AdminPayments } from './AdminPayments';
-export { AdminUsers } from './AdminUsers';
+export { default as AdminDashboard } from "./AdminDashboard";
+export { default as AdminSongs } from "./AdminSongs";
+export { default as AdminPayments } from "./AdminPayments";
+export { default as AdminUsers } from "./AdminUsers";

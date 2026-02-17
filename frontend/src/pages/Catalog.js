@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useLanguage } from '../context/LanguageContext';
 import { SongCard } from '../components/SongCard';
@@ -24,11 +24,7 @@ export const Catalog = () => {
   const [accessTier, setAccessTier] = useState('');
   const [sort, setSort] = useState('number');
 
-  useEffect(() => {
-    fetchSongs();
-  }, [language, accessTier, sort]);
-
-  const fetchSongs = async () => {
+  const fetchSongs = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -44,9 +40,13 @@ export const Catalog = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [language, accessTier, sort, search]);
 
-  const handleSearch = (e) => {
+  useEffect(() => {
+    fetchSongs();
+  }, [fetchSongs]);
+
+  const handleSearch
     e.preventDefault();
     fetchSongs();
   };

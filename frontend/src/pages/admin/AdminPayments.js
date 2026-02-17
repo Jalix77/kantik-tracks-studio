@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
@@ -45,11 +45,7 @@ export const AdminPayments = () => {
   const [reviewNote, setReviewNote] = useState('');
   const [receiptData, setReceiptData] = useState(null);
 
-  useEffect(() => {
-    fetchPayments();
-  }, [activeTab]);
-
-  const fetchPayments = async () => {
+  const fetchPayments = useCallback(async () => {
     setLoading(true);
     try {
       const status = activeTab === 'pending' ? 'PENDING' : activeTab === 'approved' ? 'APPROVED' : activeTab === 'rejected' ? 'REJECTED' : '';
@@ -61,9 +57,13 @@ export const AdminPayments = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [activeTab]);
 
-  const viewPaymentDetails = async (payment) => {
+  useEffect(() => {
+    fetchPayments();
+  }, [fetchPayments]);
+
+  const viewPaymentDetails
     setSelectedPayment(payment);
     setDetailDialogOpen(true);
     setReceiptData(null);
@@ -431,3 +431,5 @@ export const AdminPayments = () => {
     </div>
   );
 };
+
+export default AdminPayments;
