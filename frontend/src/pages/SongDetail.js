@@ -19,7 +19,7 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export const SongDetail = () => {
   const { id } = useParams();
-  const { user, canDownload, isAuthenticated } = useAuth();
+  const { canDownload, isAuthenticated } = useAuth();
   const { t } = useLanguage();
   const [song, setSong] = useState(null);
   const [playlists, setPlaylists] = useState([]);
@@ -36,8 +36,7 @@ export const SongDetail = () => {
     try {
       const response = await axios.get(`${API}/songs/${id}`);
       setSong(response.data);
-      
-      // Fetch related songs (same tags)
+
       if (response.data.tags && response.data.tags.length > 0) {
         const relatedResponse = await axios.get(`${API}/songs?tags=${response.data.tags[0]}`);
         setRelatedSongs(relatedResponse.data.filter(s => s.id !== id).slice(0, 3));
@@ -56,7 +55,6 @@ export const SongDetail = () => {
     try {
       const response = await axios.get(`${API}/songs/${id}/preview/status`);
       if (response.data.hasPreview) {
-        // Set the preview URL - this is a public endpoint
         setPreviewUrl(`${API}/songs/${id}/preview`);
       } else {
         setPreviewUrl(null);
@@ -79,7 +77,7 @@ export const SongDetail = () => {
     }
   }, [song, checkPreview]);
 
-  const fetchPlaylists
+  const fetchPlaylists = async () => {
     if (!isAuthenticated) return;
     try {
       const response = await axios.get(`${API}/playlists`);
@@ -103,8 +101,7 @@ export const SongDetail = () => {
     setDownloading(true);
     try {
       const response = await axios.get(`${API}/songs/${id}/download/${resourceType}`);
-      
-      // Decode base64 and download
+
       const byteCharacters = atob(response.data.data);
       const byteNumbers = new Array(byteCharacters.length);
       for (let i = 0; i < byteCharacters.length; i++) {
@@ -112,7 +109,7 @@ export const SongDetail = () => {
       }
       const byteArray = new Uint8Array(byteNumbers);
       const blob = new Blob([byteArray], { type: response.data.contentType });
-      
+
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -121,7 +118,7 @@ export const SongDetail = () => {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      
+
       toast.success('Download started!');
     } catch (error) {
       console.error('Download failed:', error);
@@ -175,31 +172,28 @@ export const SongDetail = () => {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8" data-testid="song-detail-page">
       <div className="max-w-4xl mx-auto">
-        {/* Back button */}
         <Link to="/catalog" className="inline-flex items-center text-white/50 hover:text-white mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
           {t('back')} {t('catalog')}
         </Link>
 
-        {/* Song Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <span className="font-mono text-4xl font-bold text-[#D4AF37]/30">
               #{song.number.toString().padStart(2, '0')}
             </span>
-            <Badge 
-              variant="outline" 
+            <Badge
+              variant="outline"
               className={song.accessTier === 'PREMIUM' ? 'badge-premium' : 'badge-standard'}
             >
               {song.accessTier === 'PREMIUM' ? t('premium') : t('standard')}
             </Badge>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-semibold mb-4" data-testid="song-title">
             {song.title}
           </h1>
-          
-          {/* Meta info */}
+
           <div className="flex flex-wrap items-center gap-6 text-white/50">
             {song.keyOriginal && (
               <div className="flex items-center gap-2">
@@ -219,9 +213,7 @@ export const SongDetail = () => {
           </div>
         </div>
 
-        {/* Main Content Card */}
         <div className="surface-card rounded-2xl p-8 mb-8">
-          {/* Preview Image */}
           <div className="aspect-video bg-gradient-to-br from-[#2E0249]/30 to-[#0F0F10] rounded-xl overflow-hidden flex items-center justify-center mb-8 relative">
             {previewLoading ? (
               <div className="text-center">
@@ -229,7 +221,7 @@ export const SongDetail = () => {
                 <p className="text-white/40">Loading preview...</p>
               </div>
             ) : previewUrl && !previewError ? (
-              <img 
+              <img
                 src={previewUrl}
                 alt={`Preview of ${song.title}`}
                 className="w-full h-full object-contain"
@@ -246,10 +238,9 @@ export const SongDetail = () => {
             )}
           </div>
 
-          {/* Action Buttons */}
           <div className="flex flex-wrap gap-4">
             {hasChordsPdf ? (
-              <Button 
+              <Button
                 className="btn-primary flex-1 sm:flex-none"
                 onClick={() => handleDownload('CHORDS_PDF')}
                 disabled={downloading || (!isAuthenticated || !canDownload(song.accessTier))}
@@ -280,7 +271,7 @@ export const SongDetail = () => {
             )}
 
             {hasLyricsPdf && (
-              <Button 
+              <Button
                 className="btn-secondary flex-1 sm:flex-none"
                 onClick={() => handleDownload('LYRICS_PDF')}
                 disabled={downloading || (!isAuthenticated || !canDownload(song.accessTier))}
@@ -336,7 +327,6 @@ export const SongDetail = () => {
           </div>
         </div>
 
-        {/* Tags */}
         {song.tags && song.tags.length > 0 && (
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
@@ -345,7 +335,7 @@ export const SongDetail = () => {
             </div>
             <div className="flex flex-wrap gap-2">
               {song.tags.map((tag, index) => (
-                <span 
+                <span
                   key={index}
                   className="px-4 py-2 rounded-full bg-white/5 text-white/60 text-sm"
                 >
@@ -356,13 +346,12 @@ export const SongDetail = () => {
           </div>
         )}
 
-        {/* Related Songs */}
         {relatedSongs.length > 0 && (
           <div>
             <h3 className="text-xl font-semibold mb-6">{t('relatedSongs')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {relatedSongs.map((relatedSong) => (
-                <Link 
+                <Link
                   key={relatedSong.id}
                   to={`/song/${relatedSong.id}`}
                   className="surface-card rounded-lg p-4 hover:border-[#D4AF37]/30 transition-colors"
