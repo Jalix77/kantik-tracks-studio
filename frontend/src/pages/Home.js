@@ -17,7 +17,8 @@ export const Home = () => {
     const fetchFeatured = async () => {
       try {
         const response = await axios.get(`${API}/songs/featured`);
-        setFeaturedSongs(response.data);
+        const data = response.data;
+        setFeaturedSongs(Array.isArray(data) ? data : data.songs ?? []);
       } catch (error) {
         console.error('Failed to fetch featured songs:', error);
       } finally {
